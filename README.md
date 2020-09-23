@@ -21,52 +21,38 @@
 
 | column           | type       | option                        |
 |------------------|------------|-------------------------------|
-| user             | references | null:false foreign_key: true  |
+<!-- | user             | references | null:false foreign_key: true  | -->
 | name             | string     | null:false                    |
 | description      | text       | null:false                    |
 | price            | integer    | null:false                    |
-| images_id        | integer    | null:false                    |
+| image            | string     | null:false                    |
+<!-- | images_id        | integer    | null:false                    |
 | category_id      | integer    | null:false                    |
 | condition_id     | integer    | null:false                    |
 | postage_payer_id | integer    | null:false                    |
 | prefecture_id    | integer    | null:false                    |
-| shipment_time_id | integer    | null:false                    |
+| shipment_time_id | integer    | null:false                    | -->
 
 ### Association
-- has_one :purchases
-- has_one :images
-- belong_to :users
+- has_one :purchase
+- has_one :image
+- belong_to :user
 
 
-## images テーブル
+## ship_addresses テーブル
 
-| column | type       | option                        |
-|--------|------------|-------------------------------|
-| image  | string     | null:false                    |
-| item   | references | null:false foreign_key: true |
-
-### Association
-- belong_to :items
-
-
-
-## addresses テーブル
-
-| column           | type       | option                        |
-|------------------|------------|-------------------------------|
-| user             | references | null:false foreign_key: true  |
-| name             | string     | null:false                    |
-| description      | text       | null:false                    |
-| price            | integer    | null:false                    |
-| images_id        | integer    | null:false                    |
-| category_id      | integer    | null:false                    |
-| condition_id     | integer    | null:false                    |
-| postage_payer_id | integer    | null:false                    |
-| prefecture_id    | integer    | null:false                    |
-| shipment_time_id | integer    | null:false                    |
+| column         | type       | option                        |
+|----------------|------------|-------------------------------|
+| post_code      | string     | null:false                    |
+<!-- | prefectures_id | integer    | null:false foreign_key: true | -->
+| city           | string     | null:false                    |
+| house_number   | string     | null:false                    |
+| building_name  | string     |                               |
+| phone_number   | string     | null:false                    |
+<!-- | purchase       | references | null:false foreign_key: true | -->
 
 ### Association
-- has_one :purchases
+- belong_to :purchase
 
 
 
@@ -78,6 +64,7 @@
 | user   | references | null:false foreign_key: true  |
 
 ### Association
-- belong_to :items
-- belong_to :addresses
-- belong_to :users
+- belong_to :item
+- has_one :ship_address
+- belong_to :user
+
