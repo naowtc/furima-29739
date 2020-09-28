@@ -10,8 +10,15 @@ class ItemsController < ApplicationController
   end
 
   def create
-    Item.create(item_params)
-    
+    @item = Item.new(item_params)
+    # Item.create (item_params)
+    unless @item.valid?
+      @item.item_imgs.new
+      render :new and return
+    end  
+
+    @item.save
+    redirect_to root_path
   end
   
   private
