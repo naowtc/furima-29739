@@ -11,14 +11,12 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    # Item.create (item_params)
-    unless @item.valid?
-      @item.item_imgs.new
-      render :new and return
-    end  
-
-    @item.save
-    redirect_to root_path
+    
+    if @item.save
+      redirect_to root_path
+    else
+      render :new
+    end
   end
   
   private
