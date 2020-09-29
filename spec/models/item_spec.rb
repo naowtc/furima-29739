@@ -4,7 +4,6 @@ RSpec.describe Item, type: :model do
   describe '#create' do
     before do
       @item = FactoryBot.build(:item)
-
     end
     context '新規登録がうまくいくとき' do
       it 'すべての値が正しく入力されていれば保存できること' do
@@ -24,7 +23,6 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Name can't be blank")
       end
-      
 
       it 'descriptionが空だと保存できないとき' do
         @item.description = nil
@@ -35,36 +33,36 @@ RSpec.describe Item, type: :model do
       it 'category_idが1だと保存できないとき' do
         @item.category_id = 1
         @item.valid?
-       
-        expect(@item.errors.full_messages).to include("Category must be other than 1")
+
+        expect(@item.errors.full_messages).to include('Category must be other than 1')
       end
 
       it 'condition_idが1だと保存できないとき' do
         @item.condition_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Condition must be other than 1")
+        expect(@item.errors.full_messages).to include('Condition must be other than 1')
       end
 
       it 'postage_payer_idが1だと保存できないとき' do
         @item.postage_payer_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Postage payer must be other than 1")
+        expect(@item.errors.full_messages).to include('Postage payer must be other than 1')
       end
 
       it 'prefecture_idが1だと保存できないとき' do
         @item.prefecture_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture must be other than 1")
+        expect(@item.errors.full_messages).to include('Prefecture must be other than 1')
       end
 
       it 'shipment_time_idが1だと保存できないとき' do
         @item.shipment_time_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipment time must be other than 1")
+        expect(@item.errors.full_messages).to include('Shipment time must be other than 1')
       end
 
       it 'priceが空だと保存できないこと' do
-        @item.price = ""
+        @item.price = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
@@ -90,24 +88,8 @@ RSpec.describe Item, type: :model do
       it 'userが紐づいてないと保存できないこと' do
         @item.user = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("User must exist")
-
+        expect(@item.errors.full_messages).to include('User must exist')
       end
-
     end
   end
 end
-        
-
-      
-
-
-
-
-
-
-
-
-
-
-
