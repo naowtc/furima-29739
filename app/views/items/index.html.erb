@@ -144,9 +144,11 @@
             </div>
             <div class='item-info'>
               <h3 class='item-name'>
+              <%#  商品名 item.nameを呼び出す %>
                 <%= item.name %>
               </h3>
               <div class='item-price'>
+              <%# 金額 item.priceを呼び出す %>
                 <span><%= item.price %>円<br>(税込み)</span>
                 <div class='star-btn'>
                   <%= image_tag "star.png", class:"star-icon" %>
