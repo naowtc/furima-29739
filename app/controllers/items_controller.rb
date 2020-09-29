@@ -19,6 +19,21 @@ class ItemsController < ApplicationController
     end
   end
 
+  def edit
+    # itemsコントローラーにeditアクションを定義。editアクションでは編集したいレコードを@itemに代入し、ビューに受け渡すことで編集画面で利用できる
+    @item = Item.find(params[:id])
+    
+  end
+    #  itemsコントローラーにupdateアクションを定義。正常に編集が完了した時とそうでない時で条件分岐
+  def update
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
+      redirect_to root_path
+    else
+      render :edit
+    end 
+  end
+
   private
 
   def item_params
