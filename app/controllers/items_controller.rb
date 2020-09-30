@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   # indexアクション以外のアクションが動く前にユーザーがログインしていなければルートページが表示されるようになる
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, except: [:index,:show]
 
   def index
     @items = Item.all
@@ -20,6 +20,12 @@ class ItemsController < ApplicationController
       render :new
     end
   end
+
+  # itemsコントローラーにshowアクションを定義。editアクションでは編集したいレコードを@itemに代入し、ビューに受け渡すことで編集画面で利用できる
+def show
+  @item = Item.find(params[:id])
+  
+end
 
   def edit
     # itemsコントローラーにeditアクションを定義。editアクションでは編集したいレコードを@itemに代入し、ビューに受け渡すことで編集画面で利用できる
