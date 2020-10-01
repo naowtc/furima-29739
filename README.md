@@ -15,7 +15,7 @@
 
 ### Association
 - has_many :items
-- has_many :purchases
+- has_many :orders
 
 ## items テーブル
 
@@ -32,7 +32,7 @@
 | shipment_time_id | integer    | null:false                    |
 
 ### Association
-- has_one :purchase
+- has_one :orders
 - belongs_to :user
 
 
@@ -49,11 +49,11 @@
 | purchase       | references | null:false foreign_key: true  |
 
 ### Association
-- belongs_to :purchase
+- belongs_to :orders
 
 
 
-## purchases テーブル
+## orders テーブル
 
 | column | type       | option                        |
 |--------|------------|-------------------------------|
