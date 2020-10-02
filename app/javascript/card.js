@@ -1,5 +1,6 @@
 const pay = () => {
-  Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY);// PAY.JPテスト公開鍵
+  Payjp.setPublicKey("pk_test_a740ad236ff4d75c9885eaac");// PAY.JPテスト公開鍵
+  // console.log("hoge")
   const form = document.getElementById("charge-form");
   //  charge-form内のsubmitが実行されるとイベントが発火します。
   // preventDefault();メソッドを用いて、Railsのフォーム送信処理をキャンセルします。
@@ -19,16 +20,17 @@ const pay = () => {
     // PAY.JPにアクセスして、トークンを作成しています。20行目に記述されている、status == 200は、HTTPステータスコードが正常だった場合の分岐です。つまり、PAY.JP側の処理でトークンの生成に成功した場合に、if文の中のコードが実行されます。
     Payjp.createToken(card, (status, response) => {
       if (status == 200) {
+        
         const token = response.id;
         const renderDom = document.getElementById("charge-form");
         const tokenObj = `<input value=${token} type="hidden" name='token'>`;
         renderDom.insertAdjacentHTML("beforeend", tokenObj);
       }
       // 入力された各カード情報がパラメーターとして送られないように、値を削除しています。
-      document.getElementById("number").removeAttribute("name");
-      document.getElementById("cvc").removeAttribute("name");
-      document.getElementById("exp_month").removeAttribute("name");
-      document.getElementById("exp_year").removeAttribute("name");
+      document.getElementById("card-number").removeAttribute("name");
+      document.getElementById("card-cvc").removeAttribute("name");
+      document.getElementById("card-exp-month").removeAttribute("name");
+      document.getElementById("card-exp-year").removeAttribute("name");
 //  フォームに記載されている情報を、サーバーサイドへ送信します。
       document.getElementById("charge-form").submit();
       document.getElementById("charge-form").reset();
