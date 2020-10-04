@@ -21,7 +21,7 @@ class OrderShipAddress
     def save
       # ユーザーとアイテムの情報を保存し、「order」という変数に入れている
       order = Order.create(user_id: user_id, item_id: item_id)
-      # 住所の情報を保存
+      # ship_addressの情報を保存
       ShipAddress.create(post_code: post_code, prefectures_id: prefectures_id, city: city, house_number: house_number, building_name: building_name, phone_number: phone_number, order_id: order.id)
       
     end
