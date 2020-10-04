@@ -1,9 +1,16 @@
 class OrdersController < ApplicationController
-  
+  before_action :authenticate_user!
+  before_action :move_to_index, except: [:index, :create, :new]
+
+
   def index
     
     @item = Item.find(params[:item_id])
+    # 出品者でないuser & 出品しているuserどちらも直接urlで購入画面に行けないようにする
+    return redirect_to root_path  if current_user.id == @item.user_id || @item.order != nil
+
     @order = OrderShipAddress.new
+    
   end
 
   def new
@@ -38,6 +45,12 @@ class OrdersController < ApplicationController
   def item_params
     params.require(:item).permit(:image, :name, :description, :price, :category_id, :condition_id, :postage_payer_id, :prefectures_id, :shipment_time_id).merge(user_id: current_user.id)
   end
+  #  ログインしていないユーザーは購入ページに遷移しようとすると、ログインページに遷移
+  def move_to_index
+    unless user_signed_in?
+      redirect_to user_session_path
+    end
+  end
 
   # itemとtoken（カード情報）address,ネストしたuser情報の受け取りを許可します。ここでいう「token」とは、card.jsの21行目で定義しているname属性のことです。pictw参照
   def order_params
@@ -53,4 +66,7 @@ class OrdersController < ApplicationController
       currency:'jpy'                 # 通貨の種類(日本円)
     )
   end
+
+  
+
 end

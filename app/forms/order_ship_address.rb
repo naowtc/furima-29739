@@ -4,16 +4,16 @@ class OrderShipAddress
   attr_accessor  :post_code, :prefectures_id, :city, :house_number, :building_name, :phone_number,  :token, :user_id,:item_id
 
     # orderモデルのバリデーションを移行
-  validates :user_id,:item_id, presence: true
-  validates :token, presence: true
+    validates :user_id,:item_id, presence: true
+    validates :token, presence: true
 
     # ship_addressモデルのバリデーションを移行
   with_options presence: true do
-    validates :post_code
+    validates :post_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
     validates :prefectures_id
     validates :city
     validates :house_number
-    validates :phone_number
+    validates :phone_number, format: {with: /\A\d{11}\z/}
     
   end
 
