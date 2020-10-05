@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   # indexアクション以外のアクションが動く前にユーザーがログインしていなければルートページが表示されるようになる。exceptで特定のアクションを許可する
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
+
   def index
     @items = Item.all
     @items = Item.includes(:user).order('created_at DESC')
@@ -47,6 +48,11 @@ class ItemsController < ApplicationController
   end
 
   private
+
+  #  before_action で@item = Item.find(params[:id])をまとめる
+  def set_item
+    @item = Item.find(params[:id])
+  end
 
   def item_params
     params.require(:item).permit(:image, :name, :description, :price, :category_id, :condition_id, :postage_payer_id, :prefecture_id, :shipment_time_id).merge(user_id: current_user.id)
