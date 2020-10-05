@@ -9,15 +9,6 @@ FactoryBot.define do
     # order_id { 2 }
     user_id { 4 }
     item_id { 4 }
-    token {'12345678'}
+    token { '12345678'}
   end
 end
-    
-    
-
-
-
-
-   
-
-    

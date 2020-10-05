@@ -1,6 +1,6 @@
 const pay = () => {
-  Payjp.setPublicKey("pk_test_a740ad236ff4d75c9885eaac");// PAY.JPテスト公開鍵
-  // console.log("hoge")
+  Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY);// PAY.JPテスト公開鍵(環境変数)
+  
   const form = document.getElementById("charge-form");
   //  charge-form内のsubmitが実行されるとイベントが発火します。
   // preventDefault();メソッドを用いて、Railsのフォーム送信処理をキャンセルします。

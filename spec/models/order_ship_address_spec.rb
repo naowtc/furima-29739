@@ -13,13 +13,12 @@ RSpec.describe OrderShipAddress, type: :model do
       @order_ship_address.post_code = nil
       @order_ship_address.valid?
       expect(@order_ship_address.errors.full_messages).to include("Post code can't be blank")
-
     end
 
     it 'post_codeが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
       @order_ship_address.post_code = '1234567'
       @order_ship_address.valid?
-      expect(@order_ship_address.errors.full_messages).to include("Post code is invalid. Include hyphen(-)")
+      expect(@order_ship_address.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
     end
 
     it 'prefectures_idが空だと保存できないこと' do
@@ -38,7 +37,7 @@ RSpec.describe OrderShipAddress, type: :model do
       @order_ship_address.house_number = nil
       @order_ship_address.valid?
       expect(@order_ship_address.errors.full_messages).to include("House number can't be blank")
-    end  
+    end
     it 'phone_numberは空だと保存できないこと' do
       @order_ship_address.phone_number = nil
       @order_ship_address.valid?
@@ -46,9 +45,9 @@ RSpec.describe OrderShipAddress, type: :model do
     end
 
     it 'phone_numberはハイフンは不要で、11桁以内でないと保存できないこと' do
-      @order_ship_address.phone_number = "1234567899-9"
+      @order_ship_address.phone_number = '1234567899-9'
       @order_ship_address.valid?
-      expect( @order_ship_address.errors.full_messages).to include('Phone number is invalid')
+      expect(@order_ship_address.errors.full_messages).to include('Phone number is invalid')
     end
 
     it 'building_nameは空でも保存できること' do
@@ -73,15 +72,5 @@ RSpec.describe OrderShipAddress, type: :model do
       @order_ship_address.valid?
       expect(@order_ship_address.errors.full_messages).to include("Item can't be blank")
     end
-
   end
 end
-   
-    
-    
-    
-    
-    
-
-
-
